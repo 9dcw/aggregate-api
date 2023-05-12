@@ -4,7 +4,7 @@ from aggregate import build, qd
 app = Flask(__name__)
 
 
-@app.route('/test')
+@app.route('/')
 def test():
 
   return 'test'
