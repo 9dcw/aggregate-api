@@ -4,6 +4,12 @@ from aggregate import build, qd
 app = Flask(__name__)
 
 
+@app.route('/test')
+def add():
+
+  return 'test'
+
+
 @app.route('/add', methods=['POST'])
 def add():
   data = request.get_json()
