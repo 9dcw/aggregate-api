@@ -21,7 +21,7 @@ def add():
 
 @app.route('/agg', methods=['POST'])
 def aggregate_start():
-    result = 'test'
+    result = build
     return jsonify({'result': result})
 
 
