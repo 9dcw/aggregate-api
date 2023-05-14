@@ -1,24 +1,27 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, cors
 from aggregate import build, qd
 
 app = Flask(__name__)
 
+app = cors(app, allow_origin="https://gpt.myinsuranceanalyst.com")
 
-@app.route('/')
-def test():
+#@app.route('/')
+#def test():
 
-    return 'test'
+#    return 'test'
+# this runs at myinsuranceanalyst.com
 
 
 @app.route('/price', methods=['POST'])
 def aggregate_start():
+    percentile = request.form.get('percentile',.99)
     a = build('agg Comm.Auto '
               '10 claims '
               '10000 xs 0 '
               'sev lognorm 50 cv 4 '
               'poisson')
     d = build('distortion myDUAL dual 1.94363')
-    result = a.price(0.99, d)
+    result = a.price(percentile, d)
 
     return jsonify({'result': result})
 
