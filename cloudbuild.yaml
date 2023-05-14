@@ -3,6 +3,6 @@ steps:
 - name: 'gcr.io/cloud-builders/docker'
   args: ['build', '-t', 'gcr.io/my-insurance-analyst/aggregate-api', '.']
 - name: 'gcr.io/cloud-builders/gcloud'
-  args: ['run', 'deploy', 'addition-api', '--image', 'gcr.io/my-insurance-analyst/aggregate-api', '--region', 'us-central', '--platform', 'managed', '--allow-unauthenticated']
+  args: ['run', 'deploy', 'aggregate-api', '--image', 'gcr.io/my-insurance-analyst/aggregate-api', '--region', 'us-central', '--platform', 'managed', '--allow-unauthenticated']
 images:
 - 'gcr.io/my-insurance-analyst/aggregate-api'
