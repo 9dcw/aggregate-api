@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify
-from aggregate import build, qd
-import pandas as pd
+from aggregate import build#, qd
+#import pandas as pd
 
 app = Flask(__name__)
 
