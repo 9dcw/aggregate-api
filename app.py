@@ -3,7 +3,7 @@ from aggregate import build, qd
 
 app = Flask(__name__)
 
-app = cors(app, allow_origin="https://gpt.myinsuranceanalyst.com")
+#app = cors(app, allow_origin="https://gpt.myinsuranceanalyst.com")
 
 #@app.route('/')
 #def test():
