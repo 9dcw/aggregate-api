@@ -1,3 +1,4 @@
 flask
 aggregate
 gunicorn
+pandas

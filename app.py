@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 from aggregate import build, qd
+import pandas as pd
 
 app = Flask(__name__)
 
@@ -23,7 +24,7 @@ def aggregate_start():
     d = build('distortion myDUAL dual 1.94363')
     result = a.price(percentile, d)
 
-    return jsonify({'result': result})
+    return jsonify({'result': result.to_json()})
 
 
 if __name__ == "__main__":
