@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, cors
+from flask import Flask, request, jsonify
 from aggregate import build, qd
 
 app = Flask(__name__)
