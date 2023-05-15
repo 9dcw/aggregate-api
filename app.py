@@ -14,7 +14,7 @@ app = Flask(__name__)
 
 @app.route('/price', methods=['POST'])
 def aggregate_start():
-    percentile = request.form.get('percentile',.99)
+    percentile = request.form.get('percentile', .99)
     a = build('agg Comm.Auto '
               '10 claims '
               '10000 xs 0 '
