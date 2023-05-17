@@ -17,7 +17,8 @@ def test():
 @app.route('/price', methods=['GET', 'POST'])
 def aggregate_start():
     request_data = request.get_json()
-    insert_data = {'name': 'agg Comm.Auto',
+    insert_data = {'name': 'Comm.Auto',
+                   'type': 'agg',
                    'claims_count': '10',
                    'attach': 0,
                    'lmt': 10000,
@@ -36,7 +37,8 @@ def aggregate_start():
             if field_name in request_data:
                 insert_data[field_name] = request_data[field_name]
 
-    build_stmt_base = "{name} {claims_count} claims {lmt} xs {attach} sev {sev_dist} {sev_mean} cv {sev_cv} {freq_dist}"
+    build_stmt_base = "{type} {name} {claims_count} claims {lmt} xs {attach} " \
+                      "sev {sev_dist} {sev_mean} cv {sev_cv} {freq_dist}"
 
     build_stmt = build_stmt_base.format(name=insert_data['name'],
                                         claims_count=insert_data['claims_count'],
