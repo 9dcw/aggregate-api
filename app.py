@@ -41,6 +41,7 @@ def aggregate_start():
                       "sev {sev_dist} {sev_mean} cv {sev_cv} {freq_dist}"
 
     build_stmt = build_stmt_base.format(name=insert_data['name'],
+                                        type=insert_data['type'],
                                         claims_count=insert_data['claims_count'],
                                         lmt=insert_data['lmt'],
                                         attach=insert_data['attach'],
@@ -56,8 +57,8 @@ def aggregate_start():
     #          'poisson')
 
     a = build(build_stmt)
-    dist_stmt_base = 'distortion {name} {distortion_name} {distortion_param}'
-    dist_stmt = dist_stmt_base.format(name=insert_data['distortion_label'],
+    dist_stmt_base = 'distortion {distortion_label} {distortion_name} {distortion_param}'
+    dist_stmt = dist_stmt_base.format(distortion_label=insert_data['distortion_label'],
                                       distortion_name=insert_data['distortion_name'],
                                       distortion_param=insert_data['distortion_param'])
     #d = build('distortion myDUAL dual 1.94363')
