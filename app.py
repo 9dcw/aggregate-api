@@ -48,7 +48,7 @@ def aggregate_start():
                                         sev_dist=insert_data['sev_dist'],
                                         sev_mean=insert_data['sev_mean'],
                                         sev_cv=insert_data['sev_cv'],
-                                        freq_dist=insert_data['freq_dist'])
+                                        freq_dist=insert_data['freq_dist'].lower())
     print(build_stmt)
     #a = build('agg Comm.Auto '
     #          '10 claims '
@@ -62,7 +62,7 @@ def aggregate_start():
                                       distortion_name=insert_data['distortion_name'],
                                       distortion_param=insert_data['distortion_param'])
     #d = build('distortion myDUAL dual 1.94363')
-    d = build(dist_stmt)
+    d = build(dist_stmt.lower())
     result = a.price(insert_data['percentile'], d)
 
     return jsonify({'result': result.to_json()})
