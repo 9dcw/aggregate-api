@@ -16,25 +16,37 @@ def test():
 
 @app.route('/price', methods=['GET', 'POST'])
 def aggregate_start():
-    percentile = request.form.get('percentile', .99)
-    name = request.form.get('name', 'agg Comm.Auto')
-    clms_count = request.form.get('claims_count', '10')
-    lmt = request.form.get('limit', '10000')
-    attach = request.form.get('attach', '0')
-    sev_dist = request.form.get('sev_dist', 'lognorm')
-    sev_mean = request.form.get('sev_mean', '50')
-    sev_cv = request.form.get('sev_cv', '4')
-    freq_dist = request.form.get('freq_dist', 'poisson')
+    request_data = request.get_json()
+    insert_data = {'name': 'agg Comm.Auto',
+                   'claims_count': '10',
+                   'attach': 0,
+                   'lmt': 10000,
+                   'sev_dist': 'lognorm',
+                   'sev_mean': 50,
+                   'sev_cv': 4,
+                   'freq_dist': 'poisson',
+                   'distortion_label': 'myDUAL',
+                   'distortion_name': 'dual',
+                   'distortion_param': '1.94363',
+                   'percentile': .99
+                   }
 
-    build_stmt_base = "{name} {clms_count} claims {lmt} xs {attach} sev {sev_dist} {sev_mean} cv {sev_cv} {freq_dist}"
-    build_stmt = build_stmt_base.format(name=name,
-                                        clms_count=clms_count,
-                                        lmt=lmt,
-                                        attach=attach,
-                                        sev_dist=sev_dist,
-                                        sev_mean=sev_mean,
-                                        sev_cv=sev_cv,
-                                        freq_dist=freq_dist)
+    if request_data:
+        for field_name in insert_data:
+            if field_name in request_data:
+                insert_data[field_name] = request_data[field_name]
+
+    build_stmt_base = "{name} {claims_count} claims {lmt} xs {attach} sev {sev_dist} {sev_mean} cv {sev_cv} {freq_dist}"
+
+    build_stmt = build_stmt_base.format(name=insert_data['name'],
+                                        claims_count=insert_data['claims_count'],
+                                        lmt=insert_data['lmt'],
+                                        attach=insert_data['attach'],
+                                        sev_dist=insert_data['sev_dist'],
+                                        sev_mean=insert_data['sev_mean'],
+                                        sev_cv=insert_data['sev_cv'],
+                                        freq_dist=insert_data['freq_dist'])
+    print(build_stmt)
     #a = build('agg Comm.Auto '
     #          '10 claims '
     #          '10000 xs 0 '
@@ -42,15 +54,13 @@ def aggregate_start():
     #          'poisson')
 
     a = build(build_stmt)
-    distortion_label = request.form.get('distortion_label', 'myDUAL')
-    distortion_name = request.form.get('distortion_name', 'dual')
-    distortion_param = request.form.get('distortion_param', '1.94363')
-    dist_stmt = 'distortion {name} {distortion_name} {distortion_param}'.format(name=distortion_label,
-                                                                                distortion_name=distortion_name,
-                                                                                distortion_param=distortion_param)
+    dist_stmt_base = 'distortion {name} {distortion_name} {distortion_param}'
+    dist_stmt = dist_stmt_base.format(name=insert_data['distortion_label'],
+                                      distortion_name=insert_data['distortion_name'],
+                                      distortion_param=insert_data['distortion_param'])
     #d = build('distortion myDUAL dual 1.94363')
     d = build(dist_stmt)
-    result = a.price(percentile, d)
+    result = a.price(insert_data['percentile'], d)
 
     return jsonify({'result': result.to_json()})
 
