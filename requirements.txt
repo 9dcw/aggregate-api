@@ -2,3 +2,4 @@ flask
 aggregate
 gunicorn
 pandas
+chainladder
