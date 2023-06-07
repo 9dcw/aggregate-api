@@ -15,7 +15,7 @@ def test():
 # this runs at myinsuranceanalyst.com
 
 
-@app.route('/price_xol', methods=['GET', 'POST'])
+@app.route('/xol', methods=['GET', 'POST'])
 def aggregate_start():
     request_data = request.get_json()
     insert_data = {'name': 'Comm.Auto',
@@ -43,7 +43,7 @@ def aggregate_start():
     return jsonify({'result': result.to_json()})
 
 
-@app.route('/price_qs', methods=['GET', 'POST'])
+@app.route('/qs', methods=['GET', 'POST'])
 def aggregate_start():
     request_data = request.get_json()
     insert_data = {'name': 'Comm.Auto',
@@ -69,6 +69,7 @@ def aggregate_start():
     result = pricing_tools.price(insert_data)
 
     return jsonify({'result': result.to_json()})
+
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000)
