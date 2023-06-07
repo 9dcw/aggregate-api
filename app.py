@@ -16,7 +16,7 @@ def test():
 
 
 @app.route('/xol', methods=['GET', 'POST'])
-def aggregate_start():
+def xol_price():
     request_data = request.get_json()
     insert_data = {'name': 'Comm.Auto',
                    'type': 'agg',
@@ -44,7 +44,7 @@ def aggregate_start():
 
 
 @app.route('/qs', methods=['GET', 'POST'])
-def aggregate_start():
+def qs_price():
     request_data = request.get_json()
     insert_data = {'name': 'Comm.Auto',
                    'type': 'agg',
