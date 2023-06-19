@@ -74,7 +74,7 @@ def qs_price():
 @app.route('/sales_data', methods=['GET', 'POST'])
 def sales_data():
     request_data = request.get_json()
-
+    result = 'nothing!'
     # I want this
 
     return jsonify({'result': result.to_json()})
