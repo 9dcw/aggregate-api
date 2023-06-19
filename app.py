@@ -71,5 +71,14 @@ def qs_price():
     return jsonify({'result': result.to_json()})
 
 
+@app.route('/sales_data', methods=['GET', 'POST'])
+def qs_price():
+    request_data = request.get_json()
+
+    # I want this
+
+    return jsonify({'result': result.to_json()})
+
+
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000)
