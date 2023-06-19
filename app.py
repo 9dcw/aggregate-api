@@ -72,7 +72,7 @@ def qs_price():
 
 
 @app.route('/sales_data', methods=['GET', 'POST'])
-def qs_price():
+def sales_data():
     request_data = request.get_json()
 
     # I want this
